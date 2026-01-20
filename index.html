@@ -7,7 +7,6 @@
 
 <style>
 *{box-sizing:border-box}
-
 body{
   margin:0;
   height:100vh;
@@ -17,7 +16,7 @@ body{
   color:white;
 }
 
-/* VIDEO */
+/* VIDEO BACKGROUND */
 video.bg{
   position:fixed;
   inset:0;
@@ -25,16 +24,16 @@ video.bg{
   height:100%;
   object-fit:cover;
   z-index:-2;
-  transition:opacity 1.5s ease,transform .5s ease,filter 1s ease;
+  opacity:0;
+  transition:opacity 1.2s ease;
 }
 
-/* OVERLAY */
+/* DARK OVERLAY */
 .overlay{
   position:fixed;
   inset:0;
   background:rgba(0,0,0,.55);
   z-index:-1;
-  transition:background 1s ease;
 }
 
 /* CENTER */
@@ -56,35 +55,30 @@ video.bg{
   backdrop-filter:blur(22px);
   box-shadow:0 35px 90px rgba(0,0,0,.7);
   text-align:center;
-  animation:fade .9s ease;
+  animation:fade .8s ease;
 }
 
 @keyframes fade{
-  from{opacity:0;transform:scale(.9)}
+  from{opacity:0;transform:scale(.95)}
   to{opacity:1;transform:scale(1)}
 }
 
 /* ASTRONAUT */
 .astronaut{
   width:160px;
-  margin:0 auto 20px;
+  margin:0 auto 18px;
   display:block;
-  animation:float 6s ease-in-out infinite, rotate 18s linear infinite;
+  animation:float 6s ease-in-out infinite;
 }
 
 @keyframes float{
   0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-16px)}
-}
-
-@keyframes rotate{
-  from{rotate:0deg}
-  to{rotate:360deg}
+  50%{transform:translateY(-14px)}
 }
 
 /* TEXT */
 #text{
-  font-size:1.1rem;
+  font-size:1.05rem;
   line-height:1.9;
   min-height:150px;
   margin-bottom:22px;
@@ -115,7 +109,7 @@ button:hover{transform:scale(1.05)}
 
 .options button{flex:1}
 
-/* RUNAWAY */
+/* RUNAWAY BUTTON */
 .runaway{
   position:relative;
   transition:top .25s ease,left .25s ease;
@@ -125,19 +119,17 @@ button:hover{transform:scale(1.05)}
 .hint{
   margin-top:14px;
   font-size:.75rem;
-  opacity:.65;
+  opacity:.6;
 }
 </style>
 </head>
 
 <body>
 
-<video id="bgVideo" class="bg" autoplay muted loop playsinline></video>
-<div class="overlay" id="overlay"></div>
+<video id="bgVideo" class="bg" muted loop playsinline></video>
+<div class="overlay"></div>
 
-<audio id="music" loop>
-  <source src="https://drive.google.com/file/d/1HZ2c2c3bfLws438kMnsu1txTLFxwrPOM/view?usp=drive_link" type="audio/mpeg">
-</audio>
+<audio id="music" loop></audio>
 
 <div class="wrapper">
   <div class="card" id="card">
@@ -151,35 +143,49 @@ button:hover{transform:scale(1.05)}
       <button id="btnTidak">Aku masih mikir…</button>
     </div>
 
-    <div class="hint">Swipe kiri / kanan di kartu ✨</div>
+    <div class="hint">Tap / Swipe kiri-kanan ✨</div>
   </div>
 </div>
 
 <script>
-/* ================= CONFIG ================= */
-const NOMOR_IKY = "0895387764779"; // GANTI NOMOR KAMU
-/* ========================================= */
+/* ================== KONFIG ================== */
+const NOMOR_IKY = "6281234567890"; // GANTI NOMOR WA KAMU
 
 const slides=[
- {video:"https://res.cloudinary.com/dj38y26rq/video/upload/v1768916803/slide1_qdrhrh.mp4",astro:"astro1.png",
-  text:"Di semesta yang luas ini…\n\nAda satu hal kecil\nyang pelan-pelan bikin Iky berhenti."},
-
- {video:"https://drive.google.com/file/d/16r-gxTYUqtRW8WvQR3SkwtuRfXszQ7DE/view?usp=drive_link",astro:"astro2.png",
-  text:"Upa…\n\nTanpa sadar,\nhari-hari Iky mulai penuh\nkarena upa."},
-
- {video:"https://drive.google.com/file/d/1gdD75BDmgkaLd-LiJINa_gIYtzX8CZ9K/view?usp=drive_link",astro:"astro3.png",
-  text:"Bukan karena upa sempurna.\n\nTapi karena bersama upa,\nIky ngerasa pulang."},
-
- {video:"https://drive.google.com/file/d/17hawJGWQmIkeJDUm7WCMHD6ev_A6rs3n/view?usp=drive_link",astro:"astro4.png",
-  text:"Aku takut kehilangan upa.\n\nBukan karena aku lemah…\nTapi karena aku sayang sedalam ini."},
-
- {video:"https://drive.google.com/file/d/1RQJtGLXJOIPHGwBuGlK5KoBtboFuAgxO/view?usp=drive_link",astro:"astro5.png",
+ {
+  video:"https://res.cloudinary.com/dj38y26rq/video/upload/v1768916803/slide1_qdrhrh.mp4",
+  astro:"astro1.png",
+  text:"Di semesta yang luas ini…\n\nAda satu hal kecil\nyang pelan-pelan bikin Iky berhenti."
+ },
+ {
+  video:"LINK_SLIDE_2",
+  astro:"astro2.png",
+  text:"Upa…\n\nTanpa sadar,\nhari-hari Iky mulai penuh\nkarena kamu."
+ },
+ {
+  video:"LINK_SLIDE_3",
+  astro:"astro3.png",
+  text:"Bukan karena kamu sempurna.\n\nTapi karena bersama kamu,\nIky ngerasa pulang."
+ },
+ {
+  video:"LINK_SLIDE_4",
+  astro:"astro4.png",
+  text:"Aku takut kehilangan kamu.\n\nBukan karena aku lemah…\nTapi karena aku sayang sedalam ini."
+ },
+ {
+  video:"LINK_SLIDE_1",
+  astro:"astro5.png",
   text:"Kalau Iky boleh minta satu hal…\n\nTinggallah.\nDi semesta kecil bernama kita 🤍",
-  end:true}
+  end:true
+ }
 ];
+
+const MUSIC_LINK = "LINK_MUSIC";
+/* =========================================== */
 
 let index=0;
 let typing=null;
+let started=false;
 let kaburCount=0;
 
 const textEl=document.getElementById("text");
@@ -189,16 +195,9 @@ const nextBtn=document.getElementById("nextBtn");
 const options=document.getElementById("options");
 const btnTidak=document.getElementById("btnTidak");
 const music=document.getElementById("music");
-const overlay=document.getElementById("overlay");
 const card=document.getElementById("card");
 
-/* MUSIC START */
-document.addEventListener("click",()=>{
- if(music.paused){
-  music.volume=0.2;
-  music.play();
- }
-},{once:true});
+music.src = MUSIC_LINK;
 
 /* TYPE EFFECT */
 function typeText(t,speed=45){
@@ -214,14 +213,19 @@ function typeText(t,speed=45){
 /* LOAD SLIDE */
 function loadSlide(){
  typeText(slides[index].text, index>=3?65:45);
- videoEl.src=slides[index].video;
- astroEl.src=slides[index].astro;
 
- // mood galau
- if(index===3){
-  overlay.style.background="rgba(0,0,0,.7)";
-  music.volume=0.35;
- }
+ astroEl.src = slides[index].astro;
+
+ videoEl.style.opacity=0;
+ videoEl.src = slides[index].video;
+ videoEl.load();
+
+ videoEl.oncanplay = ()=>{
+   if(started){
+     videoEl.play().catch(()=>{});
+     videoEl.style.opacity=1;
+   }
+ };
 
  if(slides[index].end){
   nextBtn.style.display="none";
@@ -230,8 +234,18 @@ function loadSlide(){
  }
 }
 
+/* START AFTER FIRST TAP */
+function startMedia(){
+ if(started) return;
+ started=true;
+
+ videoEl.play().catch(()=>{});
+ music.play().catch(()=>{});
+}
+
 /* NEXT */
 nextBtn.onclick=()=>{
+ startMedia();
  index++;
  if(index<slides.length) loadSlide();
 };
@@ -239,25 +253,20 @@ nextBtn.onclick=()=>{
 /* ANSWER */
 function answer(yes){
  options.style.display="none";
-
  if(yes){
   typeText("Tarik napas dulu ya…\n\nIky mau bilang sesuatu 🤍",65);
 
   setTimeout(()=>{
-   typeText("Makasih ya, Upa.\nKarena sudah memilih Iky 🤍",55);
-  },2200);
-
-  setTimeout(()=>{
-   window.location.href=
+   window.location.href =
     "https://wa.me/"+NOMOR_IKY+
     "?text="+encodeURIComponent(
-     "Iky… aku juga 🤍\nAku nangis bacanya.\nTerima kasih ya."
+     "Iky… aku juga 🤍\nAku nangis bacanya."
     );
-  },5200);
+  },4200);
  }
 }
 
-/* RUNAWAY BUTTON */
+/* RUNAWAY */
 btnTidak.addEventListener("mouseenter",kabur);
 btnTidak.addEventListener("touchstart",kabur);
 
@@ -274,7 +283,7 @@ function kabur(e){
  }
 }
 
-/* SWIPE FIX */
+/* SWIPE */
 let startX=0;
 card.addEventListener("touchstart",e=>{
  startX=e.touches[0].clientX;
@@ -282,6 +291,7 @@ card.addEventListener("touchstart",e=>{
 card.addEventListener("touchend",e=>{
  const diff=e.changedTouches[0].clientX-startX;
  if(Math.abs(diff)>70 && nextBtn.style.display!=="none"){
+  startMedia();
   index++;
   if(index<slides.length) loadSlide();
  }
@@ -290,12 +300,9 @@ card.addEventListener("touchend",e=>{
 /* INIT */
 setTimeout(()=>{
  typeText("Di semesta yang luas ini…",70);
- videoEl.src="slide1.mp4";
  astroEl.src="astro1.png";
 },800);
 </script>
 
 </body>
 </html>
-
-
